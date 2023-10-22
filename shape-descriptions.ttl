@@ -1,0 +1,360 @@
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix ex: <http://example.org/> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix ldbc: <http://localhost:3000/www.ldbc.eu/ldbc_socialnet/1.0/vocabulary/> .
+@prefix dbo: <http://localhost:3000/dbpedia.org/ontology/> .
+
+ex:PersonShape
+    a sh:NodeShape;
+    sh:targetClass ldbc:Person ;
+    sh:property [
+       sh:path ldbc:firstName ;
+       sh:minCount 1 ;
+       sh:maxCount 1 ;
+       sh:datatype xsd:string ;
+       sh:name "Given Name" ;
+    ] ;
+    sh:property [
+        sh:path ldbc:lastName ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:string;
+    ] ;
+    sh:property [
+        sh:path ldbc:gender ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:string ;
+    ] ;
+    sh:property  [
+        sh:path ldbc:birthday ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:date ;
+    ] ;
+    sh:property [
+        sh:path ldbc:email ;
+        sh:minCount 1 ;
+        sh:datatype xsd:string ;
+    ] ;
+    sh:property [
+        sh:path ldbc:speaks ;
+        sh:minCount 1 ;
+        sh:datatype xsd:string ;
+    ] ;
+    sh:property [
+        sh:path ldbc:browserUsed ;
+        sh:minCount 1 ;
+        sh:datatype xsd:string;
+    ] ;
+    sh:property [
+        sh:path ldbc:locationIP ;
+        sh:minCount 1 ;
+        sh:datatype xsd:string ;
+    ] ;
+    sh:property [
+        sh:path ldbc:hasInterest ;
+        # Tags do not have classes. So we need to define them by shape?
+        # sh:class b0_tagclass000182
+        sh:nodeKind sh:IRI ;
+        sh:node ex:tagShape ;
+    ] ;
+    sh:property [
+        sh:path foaf:knows ;
+        sh:class ldbc:Person ;
+    ] ;
+    sh:property [
+        sh:path ldbc:isLocatedIn ;
+        sh:class dbo:City ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+    ] ;
+    sh:property [
+        sh:path ldbc:studyAt ;
+        sh:nodeKind sh:BlankNode ;
+        sh:property [
+            sh:path ldbc:classYear ;
+            sh:datatype xsd:integer ;
+        ] ;
+        sh:property [
+            sh:path ldbc:hasOrganisation ;
+            sh:nodeKind sh:IRI ;
+            sh:class dbo:University ;
+        ] ;
+    ] ;
+    sh:property [
+        sh:path ldbc:workAt ;
+        sh:nodeKind sh:BlankNode ;
+        sh:property [
+            sh:path ldbc:workFrom ;
+            sh:datatype xsd:integer ;
+        ] ;
+        sh:property [
+            sh:path ldbc:hasOrganisation ;
+            sh:nodeKind sh:IRI ;
+            sh:class dbo:Company ;
+        ]
+    ] ;
+    sh:property [
+        sh:path ldbc:likes ;
+        sh:nodeKind sh:BlankNode ;
+        sh:property [
+            sh:path ldbc:creationDate ;
+            sh:datatype xsd:dateTime ;
+        ] ;
+        sh:property [
+            sh:path ldbc:hasPost ;
+            sh:nodeKind sh:IRI ;
+            sh:class ldbc:Post ;
+        ]
+    ]
+.
+
+ex:CityShape
+    a sh:NodeShape ;
+    sh:targetClass dbo:City;
+    sh:property [
+        sh:path ldbc:isPartOf ;
+        sh:nodeKind sh:IRI ;
+        sh:class dbo:Country ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+    ] ;
+    sh:property [
+        sh:path foaf:name ;
+        sh:datatype xsd:string ;
+    ]
+.
+
+ex:CountryShape
+    a sh:NodeShape ;
+    sh:targetClass dbo:Country;
+    sh:property [
+        sh:path ldbc:isPartOf ;
+        sh:nodeKind sh:IRI ;
+        sh:class dbo:Continent ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+    ] ;
+    sh:property [
+        sh:path foaf:name ;
+        sh:datatype xsd:string ;
+    ]
+.
+
+ex:OrganisationShape
+    a sh:NodeShape ;
+    sh:targetClass dbo:Company, dbo:University ;
+    sh:property [
+        sh:path ldbc:id ;
+        sh:datatype xsd:int ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+    ] ;
+    sh:property [
+        sh:path foaf:name ;
+        sh:datatype xsd:string ;
+        sh:maxCount 1 ;
+        sh:minCount 1 ;
+    ] ;
+    sh:property [
+        sh:path ldbc:url ;
+        sh:nodeKind sh:IRI ;
+        sh:maxCount 1 ;
+        sh:minCount 1 ;
+    ]
+.
+
+ex:tagShape
+    a sh:NodeShape ;
+    sh:property [
+        sh:path rdf:type ;
+        sh:nodeKind sh:IRI ;
+        sh:node ex:tagClassShape ;
+    ] ;
+    sh:property [
+        sh:path foaf:name ;
+        sh:datatype xsd:string ;
+    ] ;
+    sh:property [
+        sh:path ldbc:id ;
+        sh:datatype xsd:int ;
+    ]
+.
+
+ex:tagClassShape
+    a sh:NodeShape ;
+    sh:property [
+        sh:path rdfs:label ;
+        sh:datatype xsd:string ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+    ];
+    sh:property [
+        sh:path ldbc:id ;
+        sh:datatype xsd:int ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+    ] ;
+    sh:property [
+        sh:path ldbc:url ;
+        sh:nodeKind sh:IRI ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+    ] ;
+    sh:property [
+        sh:path rdfs:subClassOf ;
+        sh:nodeKind sh:IRI ;
+        sh:node ex:tagClassShape ;
+        sh:maxCount 1 ;
+    ]
+.
+
+# ===================================== Fora =====================================
+
+ex:forumShape
+    a sh:NodeShape ;
+    sh:targetClass ldbc:Forum ;
+    sh:property [
+        sh:path ldbc:containerOf ;
+        sh:nodeKind sh:IRI ;
+        sh:minCount 1 ;
+    ] ;
+    sh:property [
+        sh:path ldbc:creationDate ;
+        sh:datatype xsd:dateTime ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+    ] ;
+    sh:property [
+        sh:path ldbc:hasModerator ;
+        sh:class ldbc:Person ;
+        sh:maxCount 1 ;
+    ] ;
+    sh:property [
+        sh:path ldbc:hasTag ;
+        sh:node ex:tagShape ;
+    ] ;
+    sh:property [
+        sh:path ldbc:id ;
+        sh:datatype xsd:long ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+    ] ;
+    sh:property [
+        sh:path ldbc:title ;
+        sh:datatype xsd:string ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+    ] ;
+    sh:property [
+        sh:path ldbc:hasMember ;
+        sh:nodeKind sh:BlankNode ;
+        sh:property [
+            sh:path ldbc:hasPerson ;
+            sh:class ldbc:Person ;
+        ] ;
+        sh:property [
+            sh:path ldbc:joinDate ;
+            sh:datatype xsd:dateTime ;
+        ];
+    ]
+.
+
+ex:messageShape
+    a sh:NodeShape ;
+    sh:targetClass ldbc:Post ;
+    sh:targetClass ldbc:Comment ;
+    sh:property [
+        sh:path ldbc:browserUsed ;
+        sh:datatype xsd:string ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+    ] ;
+    sh:property [
+        sh:path ldbc:creationDate ;
+        sh:datatype xsd:dateTime ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+    ] ;
+    sh:property [
+        sh:path ldbc:hasCreator ;
+        sh:nodeKind sh:IRI ;
+        sh:class ldbc:Person ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+    ] ;
+    sh:property [
+        sh:path ldbc:id ;
+        sh:datatype xsd:long ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+    ] ;
+    sh:property [
+        sh:path ldbc:isLocatedIn ;
+        sh:nodeKind sh:IRI ;
+        sh:class dbo:Place ;
+    ] ;
+    sh:property [
+        sh:path ldbc:locationIP ;
+        sh:datatype xsd:string ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+    ] ;
+    sh:property [
+        # Optional
+        sh:path ldbc:content ;
+        sh:datatype xsd:string ;
+    ] ;
+    sh:property [
+        # Optional
+        sh:path ldbc:length ;
+        sh:datatype xsd:int ;
+    ] ;
+    sh:property [
+        # Optional
+        sh:path rdfs:seeAlso ;
+        sh:nodeKind sh:IRI ;
+    ] ;
+    sh:property [
+        # Optional
+        sh:path ldbc:language ;
+        sh:datatype xsd:string ;
+    ] ;
+    sh:property [
+        # Optional
+        sh:path ldbc:imageFile ;
+        sh:datatype xsd:string ;
+    ] ;
+.
+
+ex:postShape
+    a sh:NodeShape ;
+    sh:targetClass ldbc:Post ;
+    sh:property [
+        # Optional
+        sh:path ldbc:language ;
+        sh:datatype xsd:string ;
+    ] ;
+    sh:property [
+        # Optional
+        sh:path ldbc:imageFile ;
+        sh:datatype xsd:string ;
+    ] ;
+.
+
+ex:commentShape
+    a sh:NodeShape ;
+    sh:targetClass ldbc:Comment;
+    sh:property [
+        sh:path ldbc:replyOf ;
+        sh:nodeKind sh:IRI ;
+        sh:class ldbc:Post ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+    ]
+.
+

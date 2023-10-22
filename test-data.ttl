@@ -1,0 +1,143 @@
+@prefix ns1: <http://localhost:3000/www.ldbc.eu/ldbc_socialnet/1.0/vocabulary/> .
+@prefix ns2: <http://localhost:3000/internal/> .
+@prefix pim: <http://www.w3.org/ns/pim/space#> .
+@prefix solid: <http://www.w3.org/ns/solid/terms#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+
+<http://localhost:3000/pods/00000000000000000065/profile/card#me> a ns1:Person ;
+    ns2:commentsFragmentation ns2:FragmentationCreationDate ;
+    ns2:postsFragmentation ns2:FragmentationCreationDate ;
+    ns1:birthday "1989-06-15"^^xsd:date ;
+    ns1:browserUsed "Firefox" ;
+    ns1:creationDate "2010-02-26T23:17:18.465000+00:00"^^xsd:dateTime ;
+    ns1:email "Marc65@gmail.com",
+                  "Marc65@gmx.com",
+                  "Marc65@yahoo.com" ;
+    ns1:firstName "Marc" ;
+    ns1:gender "female" ;
+    ns1:hasInterest <http://localhost:3000/www.ldbc.eu/ldbc_socialnet/1.0/tag/Money_for_Nothing/Beverly_Hillbillies*> ;
+    ns1:id "65"^^xsd:long ;
+    ns1:isLocatedIn <http://localhost:3000/dbpedia.org/resource/Fianarantosa> ;
+    ns1:lastName "Ravalomanana" ;
+    ns1:likes [ ns1:creationDate "2012-07-06T07:59:32.979000+00:00"^^xsd:dateTime ;
+                    ns1:hasPost <http://localhost:3000/pods/00000000000000000471/posts/257875> ] ;
+    ns1:locationIP "41.204.119.20" ;
+    ns1:speaks "en",
+                   "fr",
+                   "mg" ;
+    ns1:studyAt [ ns1:classYear 2007 ;
+                      ns1:hasOrganisation <http://localhost:3000/www.ldbc.eu/ldbc_socialnet/1.0/data/uni004991> ] ;
+    ns1:workAt [ ns1:hasOrganisation <http://localhost:3000/www.ldbc.eu/ldbc_socialnet/1.0/data/com000758> ;
+                     ns1:workFrom 2008 ] ;
+    pim:storage <http://localhost:3000/pods/00000000000000000065/> ;
+    solid:publicTypeIndex <http://localhost:3000/pods/00000000000000000065/settings/publicTypeIndex> .
+
+<http://localhost:3000/dbpedia.org/resource/Fianarantosa> a <http://localhost:3000/dbpedia.org/ontology/City>,
+                                                                <http://localhost:3000/dbpedia.org/ontology/Place> ;
+    ns1:id "1203"^^xsd:int ;
+    ns1:isPartOf <http://localhost:3000/dbpedia.org/resource/Madagascar> ;
+    foaf:name "Fianarantosa" .
+
+<http://localhost:3000/www.ldbc.eu/ldbc_socialnet/1.0/data/com000758> a <http://localhost:3000/dbpedia.org/ontology/Company> ;
+    ns1:id "758"^^xsd:int ;
+    ns1:isLocatedIn <http://localhost:3000/dbpedia.org/resource/Madagascar> ;
+    ns1:url <http://localhost:3000/dbpedia.org/resource/Air_Madagascar> ;
+    foaf:name "Air_Madagascar" .
+
+<http://localhost:3000/www.ldbc.eu/ldbc_socialnet/1.0/data/uni004991> a <http://localhost:3000/dbpedia.org/ontology/University> ;
+    ns1:id "4991"^^xsd:int ;
+    ns1:isLocatedIn <http://localhost:3000/dbpedia.org/resource/Antananarivo> ;
+    ns1:url <http://localhost:3000/dbpedia.org/resource/Madagascar_Institute_of_Political_Studies> ;
+    foaf:name "Madagascar_Institute_of_Political_Studies" .
+
+<http://localhost:3000/dbpedia.org/resource/Madagascar> a <http://localhost:3000/dbpedia.org/ontology/Country>,
+                                                              <http://localhost:3000/dbpedia.org/ontology/Place> ;
+    ns1:id "84"^^xsd:int ;
+    ns1:isPartOf <http://localhost:3000/dbpedia.org/resource/Africa> ;
+    foaf:name "Madagascar" .
+
+<http://localhost:3000/dbpedia.org/resource/Africa> a <http://localhost:3000/dbpedia.org/ontology/Continent>,
+                                                          <http://localhost:3000/dbpedia.org/ontology/Place> ;
+    foaf:name "Africa" .
+
+<http://localhost:3000/pods/00000000000000000471/posts/257875> a ns1:Post ;
+    ns1:browserUsed "Firefox" ;
+    ns1:creationDate "2010-03-01T17:44:23.049000+00:00"^^xsd:dateTime ;
+    ns1:hasCreator <http://localhost:3000/pods/00000000000000000065/profile/card#me> ;
+    ns1:id "257875"^^xsd:long ;
+    ns1:imageFile "photo257875.jpg" ;
+    ns1:isLocatedIn <http://localhost:3000/dbpedia.org/resource/Madagascar> ;
+    ns1:locationIP "195.29.129.109" ;
+    rdfs:seeAlso <http://localhost:3000/www.ldbc.eu/ldbc_socialnet/1.0/data/forum00000000000000011210> .
+
+# ===================================== TAGS =====================================
+
+<http://localhost:3000/www.ldbc.eu/ldbc_socialnet/1.0/tag/Money_for_Nothing/Beverly_Hillbillies*> a <http://localhost:3000/www.example.org/b0_tagclass000342> ;
+    ns1:id "7187"^^xsd:int ;
+    foaf:name "Money_for_Nothing/Beverly_Hillbillies*" .
+
+<http://localhost:3000/www.example.org/b0_tagclass000342> a ns1:TagClass ;
+    rdfs:label "Single" ;
+    ns1:id "342"^^xsd:int ;
+    ns1:url <http://localhost:3000/dbpedia.org/ontology/Single> ;
+    rdfs:subClassOf <http://localhost:3000/www.example.org/b0_tagclass000123> .
+
+<http://localhost:3000/www.example.org/b0_tagclass000123> a ns1:TagClass ;
+    rdfs:label "MusicalWork" ;
+    ns1:id "123"^^xsd:int ;
+    ns1:url <http://localhost:3000/dbpedia.org/ontology/MusicalWork> ;
+    rdfs:subClassOf <http://localhost:3000/www.example.org/b0_tagclass000188> .
+
+<http://localhost:3000/www.example.org/b0_tagclass000188> a ns1:TagClass ;
+    rdfs:label "Work" ;
+    ns1:id "188"^^xsd:int ;
+    ns1:url <http://localhost:3000/dbpedia.org/ontology/Work> ;
+    rdfs:subClassOf <http://localhost:3000/www.example.org/b0_tagclass000000> .
+
+<http://localhost:3000/www.example.org/b0_tagclass000000> a ns1:TagClass ;
+rdfs:label "Thing" ;
+ns1:id "0"^^xsd:int ;
+ns1:url <http://localhost:3000/www.w3.org/2002/07/owl#Thing> .
+
+# ===================================== Fora =====================================
+
+<http://localhost:3000/www.ldbc.eu/ldbc_socialnet/1.0/data/forum00000000000000011210> a ns1:Forum ;
+    ns1:containerOf <http://localhost:3000/pods/00000000000000000471/posts/257874>,
+                        <http://localhost:3000/pods/00000000000000000471/posts/257875>,
+                        <http://localhost:3000/pods/00000000000000000471/posts/257876>,
+                        <http://localhost:3000/pods/00000000000000000471/posts/257877>,
+                        <http://localhost:3000/pods/00000000000000000471/posts/257878>,
+                        <http://localhost:3000/pods/00000000000000000471/posts/257879>,
+                        <http://localhost:3000/pods/00000000000000000471/posts/257880>,
+                        <http://localhost:3000/pods/00000000000000000471/posts/257881>,
+                        <http://localhost:3000/pods/00000000000000000471/posts/257882>,
+                        <http://localhost:3000/pods/00000000000000000471/posts/257883>,
+                        <http://localhost:3000/pods/00000000000000000471/posts/257884>,
+                        <http://localhost:3000/pods/00000000000000000471/posts/257885>,
+                        <http://localhost:3000/pods/00000000000000000471/posts/257886>,
+                        <http://localhost:3000/pods/00000000000000000471/posts/257887>,
+                        <http://localhost:3000/pods/00000000000000000471/posts/257888>,
+                        <http://localhost:3000/pods/00000000000000000471/posts/257889>,
+                        <http://localhost:3000/pods/00000000000000000471/posts/257890> ;
+    ns1:hasMember [ ns1:hasPerson <http://localhost:3000/pods/00000000000000000065/profile/card#me> ;
+        ns1:joinDate "2011-08-05T20:20:02.836000+00:00"^^xsd:dateTime ] ;
+    ns1:creationDate "2010-03-01T17:44:11.049000+00:00"^^xsd:dateTime ;
+    ns1:hasModerator <http://localhost:3000/pods/00000000000000000065/profile/card#me> ;
+    ns1:hasTag <http://localhost:3000/www.ldbc.eu/ldbc_socialnet/1.0/tag/Money_for_Nothing/Beverly_Hillbillies*> ;
+    ns1:id "11210"^^xsd:long ;
+    ns1:title "Album 27 of Zoran Aralica" .
+
+
+<http://localhost:3000/pods/00000000000000000065/comments/2012-08-17#1030792474556> a ns1:Comment ;
+    ns1:browserUsed "Firefox" ;
+    ns1:content "duh" ;
+    ns1:creationDate "2012-08-17T18:27:31.155000+00:00"^^xsd:dateTime ;
+    ns1:hasCreator <http://localhost:3000/pods/00000000000000000065/profile/card#me> ;
+    ns1:id "1030792474556"^^xsd:long ;
+    ns1:isLocatedIn <http://localhost:3000/dbpedia.org/resource/Madagascar> ;
+    ns1:length "3"^^xsd:int ;
+    ns1:locationIP "41.204.119.20" ;
+    ns1:replyOf <http://localhost:3000/pods/00000000000000000471/posts/257875> .
